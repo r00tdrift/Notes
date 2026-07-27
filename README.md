@@ -9,6 +9,7 @@ My goal is to continuously improve my coding skills and also creating practical 
 
 ## Repository Structure
 
+```
 the-long-con
 │
 ├── README.md
@@ -47,7 +48,7 @@ the-long-con
 │
 └── docs/
     └── references.md
-
+```
 
 ## Related Resources
 
