@@ -1,60 +1,27 @@
-# the-long-con
+# Decoders
 
-Welcome! 
+Scripts for decoding/encoding data commonly found in CTFs, logs, and recon output.
 
-This repository will document my progression as I learn programming and cybersecurity.
+## Contents
 
-Instead of just showcasing only completed projects. This repository will contain the tools, scripts, and utilities I built while solving labs, CTFs, and other security challenges.
-My goal is to continuously improve my coding skills and also creating practical resources that I can reuse throughout my cybersecurity journey.
+- **simple_decoder.py** — Multi-format decoder supporting base64, hex, ROT13, URL-encoding, and binary.
+- **brainfuck_decoder.py** — Brainfuck interpreter for decoding esolang-encoded strings/flags.
 
-## Repository Structure
+### Usage
 
-```
-the-long-con
-│
-├── README.md
-├── LICENSE
-│
-├── tools/
-│   ├── python/
-│   │   ├── decoders/
-│   │   │   ├── simple_decoder.py
-│   │   │   └── README.md
-│   │   │
-│   │   ├── networking/
-│   │   ├── web/
-│   │   ├── cryptography/
-│   │   ├── exploitation/
-│   │   ├── post-exploitation/
-│   │   ├── forensics/
-│   │   └── utilities/
-│   │
-│   ├── bash/
-│   ├── powershell/
-│   └── go/
-│
-├── payloads/
-│   ├── reverse-shells.md
-│   ├── web-shells.md
-│   └── encoding-cheatsheet.md
-│
-├── templates/
-│   ├── python-script-template.py
-│   ├── bash-script-template.sh
-│   └── writeup-template.md
-│
-├── assets/
-│   └── images/
-│
-└── docs/
-    └── references.md
+```bash
+python simple_decoder.py --method base64 --input "SGVsbG8gd29ybGQ="
+python simple_decoder.py --method hex --input "48656c6c6f"
+echo "Uryyb" | python simple_decoder.py --method rot13
+
+python brainfuck_decoder.py
+# Paste your Brainfuck code:  <paste code here, then press Enter>
 ```
 
-## Related Resources
+## Ideas for future additions
 
-**GitBook** - Detailed write-ups, walkthroughs, and notes from CTF challenges, labs, and other cybersecurity challenges.
-**GitBook** https://notes-95.gitbook.io/documents
-
-## Disclaimer
-
-This repository is intended for educational purposes only. All code and examples are developed and tested in a legal lab environment such as Capture the Flag (CTF) challenges, intentionally vulnerable machines, and personal practice labs.
+- Base32 / Base85 decoder
+- Caesar cipher brute-forcer (all 25 shifts)
+- Morse code decoder
+- JWT decoder (header/payload, no verification)
+- Multi-layer auto-decoder (detects and chains encodings)
