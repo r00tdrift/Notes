@@ -7,6 +7,7 @@
 - [OverTheWire](https://overthewire.org/wargames/)
 - [PortSwigger Web Security Academy](https://portswigger.net/web-security)
 - [CryptoHack](https://cryptohack.org/)
+- [VulnHub](https://www.vulnhub.com/)
 
 ## Reference / Cheatsheets
 - [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
@@ -17,23 +18,18 @@
 - [MITRE ATT&CK](https://attack.mitre.org/)
 
 ## Books
-- *The Web Application Hacker's Handbook* — Stuttard & Pinto
-- *Hacking: The Art of Exploitation* — Jon Erickson
-- *Practical Malware Analysis* — Sikorski & Honig
-- *The Hacker Playbook* series — Peter Kim
-- *Red Team Field Manual (RTFM)* / *Blue Team Field Manual (BTFM)*
-
-## Certifications (roughly beginner → advanced)
-- CompTIA Security+
-- eJPT (INE)
-- OSCP (Offensive Security)
-- CRTP / CRTO (Red Team focused)
-- OSCE3 / OSEP (advanced exploitation)
+- *Automate the Boring Stuff with Python 3rd Edition- Al Sweigart*
+- *Black Hat Python 2nd Edition - Justin Seitz, Tim Arnold*
+- *ComptIA Security+ Study Guide 9th Edition - Mike Chapple, David Seidl*
+- *CompTIA Network+ Study Guide 6th Edition - Todd Laramie*
 
 ## Communities
-- r/netsec, r/AskNetsec
-- InfoSec Twitter/X and Mastodon (infosec.exchange)
-- Local DEF CON groups (DC groups)
+- [OwlSec](https://discord.com/invite/owlsec)
+- [OffSec](https://discord.com/invite/offsec)
+- [TryHackMe](https://discord.com/invite/tryhackme)
+- [HackTheBox](https://discord.com/invite/hackthebox)
+- [PortSwigger](https://discord.com/invite/portswigger)
+
 
 ## Blogs & Research
 - [Project Zero](https://googleprojectzero.blogspot.com/)
