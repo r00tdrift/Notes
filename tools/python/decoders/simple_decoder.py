@@ -173,14 +173,23 @@ def decode_atbash(text):
 
 # ---------- Helper for pasting multi-line input ----------
 
+import sys
+import select
+
+
 def get_encoded_string():
-    print("Enter the encoded string (press Enter on a blank line when done):")
-    lines = []
-    while True:
-        line = input()
-        if line == "":
+    first_line = input("Enter the encoded string: ")
+    lines = [first_line]
+
+    # If the paste got split into multiple lines, the rest is already
+    # sitting in the input buffer. Grab it automatically so the user
+    # only has to hit Enter once.
+    while select.select([sys.stdin], [], [], 0.05)[0]:
+        next_line = sys.stdin.readline().rstrip('\n')
+        if next_line == "":
             break
-        lines.append(line)
+        lines.append(next_line)
+
     return "".join(lines)
 
 
