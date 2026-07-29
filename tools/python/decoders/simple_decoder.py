@@ -174,23 +174,76 @@ def decode_atbash(text):
 # ---------- Helper for pasting multi-line input ----------
 
 import sys
-import select
+import termios
 
 
 def get_encoded_string():
-    first_line = input("Enter the encoded string: ")
-    lines = [first_line]
+    print("Enter the encoded string: ", end="", flush=True)
 
-    # If the paste got split into multiple lines, the rest is already
-    # sitting in the input buffer. Grab it automatically so the user
-    # only has to hit Enter once.
-    while select.select([sys.stdin], [], [], 0.05)[0]:
-        next_line = sys.stdin.readline().rstrip('\n')
-        if next_line == "":
-            break
-        lines.append(next_line)
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    new_settings = termios.tcgetattr(fd)
+    # Turn off canonical mode and echo so we can read raw keystrokes
+    new_settings[3] = new_settings[3] & ~(termios.ICANON | termios.ECHO)
+    termios.tcsetattr(fd, termios.TCSANOW, new_settings)
 
-    return "".join(lines)
+    # Tell the terminal to wrap pasted text in special markers instead
+    # of sending it like normal typed characters/Enter presses
+    sys.stdout.write("\x1b[?2004h")
+    sys.stdout.flush()
+
+    result = ""
+    escape_buffer = ""
+    in_paste = False
+
+    try:
+        while True:
+            ch = sys.stdin.read(1)
+
+            if ch == "\x1b" or escape_buffer:
+                escape_buffer += ch
+                if "\x1b[200~".startswith(escape_buffer):
+                    if escape_buffer == "\x1b[200~":
+                        in_paste = True
+                        escape_buffer = ""
+                    continue
+                elif "\x1b[201~".startswith(escape_buffer):
+                    if escape_buffer == "\x1b[201~":
+                        in_paste = False
+                        escape_buffer = ""
+                    continue
+                else:
+                    escape_buffer = ""
+                    continue
+
+            if ch in ("\r", "\n"):
+                if in_paste:
+                    result += "\n"
+                    continue
+                else:
+                    break
+
+            if ch == "\x7f":  # backspace
+                if result and not in_paste:
+                    result = result[:-1]
+                    sys.stdout.write("\b \b")
+                    sys.stdout.flush()
+                continue
+
+            if ch == "\x03":  # Ctrl+C
+                raise KeyboardInterrupt
+
+            result += ch
+            sys.stdout.write(ch)
+            sys.stdout.flush()
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        sys.stdout.write("\x1b[?2004l")
+        sys.stdout.flush()
+        print()
+
+    # Strip out any newlines that were part of a pasted block
+    return result.replace("\n", "")
 
 
 # ---------- Main Menu ----------
