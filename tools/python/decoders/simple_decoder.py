@@ -171,6 +171,19 @@ def decode_atbash(text):
     return ''.join(result)
 
 
+# ---------- Helper for pasting multi-line input ----------
+
+def get_encoded_string():
+    print("Enter the encoded string (press Enter on a blank line when done):")
+    lines = []
+    while True:
+        line = input()
+        if line == "":
+            break
+        lines.append(line)
+    return "".join(lines)
+
+
 # ---------- Main Menu ----------
 
 def main():
@@ -193,63 +206,63 @@ def main():
     if choice == "1":
         print("\nSeparate letters with a space, and words with ' / '")
         print("Example: .... . .-.. .-.. --- / .-- --- .-. .-.. -..\n")
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         result = decode_morse(user_input)
         print("Decoded message:", result)
 
     elif choice == "2":
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         result = decode_brainfuck(user_input)
         print("Decoded message:", result)
 
     elif choice == "3":
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         result = decode_base64(user_input)
         print("Decoded message:", result)
 
     elif choice == "4":
         print("\nSeparate each 8-bit byte with a space.")
         print("Example: 01001000 01101001\n")
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         result = decode_binary(user_input)
         print("Decoded message:", result)
 
     elif choice == "5":
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         result = decode_hex(user_input)
         print("Decoded message:", result)
 
     elif choice == "6":
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         shift = int(input("Enter the shift number (13 for ROT13): "))
         result = decode_caesar(user_input, shift)
         print("Decoded message:", result)
 
     elif choice == "7":
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         result = decode_url(user_input)
         print("Decoded message:", result)
 
     elif choice == "8":
         print("\nSeparate each number with a space.")
         print("Example: 72 101 108 108 111\n")
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         result = decode_ascii(user_input)
         print("Decoded message:", result)
 
     elif choice == "9":
         print("\nExample: \\x48\\x65\\x6c\\x6c\\x6f\n")
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         result = decode_hex_escaped(user_input)
         print("Decoded message:", result)
 
     elif choice == "10":
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         result = decode_base32(user_input)
         print("Decoded message:", result)
 
     elif choice == "11":
-        user_input = input("Enter the encoded string: ")
+        user_input = get_encoded_string()
         result = decode_atbash(user_input)
         print("Decoded message:", result)
 
