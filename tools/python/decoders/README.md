@@ -4,7 +4,7 @@ Scripts for decoding data commonly found in CTFs, logs, and recon output.
 
 ## Contents
 
-## Universal Decoder
+Universal Decoder
 
 A simple command-line tool that decodes strings encoded in one of 11 common formats.
 Run the script, pick a decoder from the menu, then paste in your encoded string.
